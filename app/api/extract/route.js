@@ -69,11 +69,13 @@ export async function POST(request) {
   }
 
   try {
-    const { image, mediaType } = await request.json();
+    const { image, mediaType, learningContext } = await request.json();
 
     if (!image) {
       return NextResponse.json({ error: "No image provided" }, { status: 400 });
     }
+
+    const fullPrompt = EXTRACTION_PROMPT + (learningContext || "");
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -97,7 +99,7 @@ export async function POST(request) {
                   data: image,
                 },
               },
-              { type: "text", text: EXTRACTION_PROMPT },
+              { type: "text", text: fullPrompt },
             ],
           },
         ],
@@ -106,9 +108,10 @@ export async function POST(request) {
 
     if (!response.ok) {
       const errText = await response.text();
+      const status = response.status === 429 ? 429 : 502;
       return NextResponse.json(
         { error: `Anthropic API error: ${response.status} — ${errText}` },
-        { status: 502 }
+        { status }
       );
     }
 
