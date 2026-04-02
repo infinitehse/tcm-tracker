@@ -359,12 +359,16 @@ The AI has previously misread these categories. Pay extra attention:`;
             <h1 style={S.headerTitle}>HSE Score Tracker</h1>
             <p style={S.headerSub}>Inspection Dashboard Analyzer</p>
           </div>
+          {pastCorrections.length > 0 && (
+            <div style={S.learningBadge}>
+              🧠 {pastCorrections.length} correction{pastCorrections.length > 1 ? "s" : ""} learned
+            </div>
+          )}
         </div>
-        {pastCorrections.length > 0 && (
-          <div style={S.learningBadge}>
-            🧠 AI learned from {pastCorrections.length} past correction{pastCorrections.length > 1 ? "s" : ""}
-          </div>
-        )}
+        <div style={S.headerRight}>
+          <span style={S.creditLine}>Built by <strong style={{ color: "#f9fafb" }}>Amr Abousamra</strong></span>
+          <span style={S.creditLine}>from <strong style={{ color: "#f59e0b" }}>Infinite HSE</strong> for Safety Solutions</span>
+        </div>
       </header>
 
       {/* Welcome */}
@@ -573,7 +577,7 @@ The AI has previously misread these categories. Pay extra attention:`;
         </div>
       )}
 
-      <footer style={S.footer}>Built for Infinite HSE · Powered by Claude Vision + Supabase</footer>
+      <footer style={S.footer}>Powered by Claude Vision + Supabase · © {new Date().getFullYear()} Infinite HSE</footer>
     </div>
   );
 }
@@ -690,6 +694,8 @@ const S = {
   root: { minHeight: "100vh" },
   header: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 24px", borderBottom: "1px solid #1e2028", background: "#14161b" },
   headerLeft: { display: "flex", alignItems: "center", gap: 12 },
+  headerRight: { display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2 },
+  creditLine: { fontSize: 12, color: "#9ca3af", letterSpacing: 0.3 },
   headerTitle: { fontSize: 18, fontWeight: 700, color: "#f59e0b", fontFamily: "'Space Mono', monospace" },
   headerSub: { fontSize: 11, color: "#6b7280", letterSpacing: 1, textTransform: "uppercase" },
   learningBadge: { fontSize: 11, color: "#a78bfa", background: "#7c3aed22", padding: "4px 10px", borderRadius: 8, border: "1px solid #7c3aed44" },
@@ -722,5 +728,5 @@ const S = {
   error: { margin: "12px 24px", padding: "10px 16px", background: "#7f1d1d", color: "#fca5a5", borderRadius: 8, fontSize: 13, display: "flex", justifyContent: "space-between", alignItems: "center" },
   errorClose: { background: "none", border: "none", color: "#fca5a5", fontSize: 18, cursor: "pointer" },
   legend: { marginTop: 16, display: "flex", gap: 16, flexWrap: "wrap", padding: 12, background: "#14161b", borderRadius: 8 },
-  footer: { textAlign: "center", padding: 20, fontSize: 11, color: "#2a2d35", borderTop: "1px solid #1e2028", marginTop: 32 },
+  footer: { textAlign: "center", padding: 20, fontSize: 12, color: "#6b7280", borderTop: "1px solid #1e2028", marginTop: 32 },
 };
