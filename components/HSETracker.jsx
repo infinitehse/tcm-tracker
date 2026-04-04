@@ -373,7 +373,7 @@ The AI has previously misread these categories. Pay extra attention:`;
 
       {/* Welcome */}
       <div style={S.welcome}>
-        <h2 style={S.welcomeTitle}>Welcome, Amjad</h2>
+        <h2 style={S.welcomeTitle}>Welcome, Amjaad 👋</h2>
         <p style={S.welcomeDesc}>
           Upload daily HSE inspection dashboard screenshots. The AI extracts all scores automatically.
           Review and correct any values before saving — the AI learns from your corrections over time.
